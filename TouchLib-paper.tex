@@ -1,0 +1,94 @@
+\documentclass[format=sigchi, screen=true, review=true]{acmart}
+% rubber: clean TouchLib-paper.brf TouchLib-paper.err TouchLib-paper.out TouchLib-paper.thm TouchLib-paper-blx.bib TouchLib-paper.run.xml TouchLib-paper.xcp
+% rubber: depend TouchLib-paper.bib
+% rubber: module bibtex
+% rubber: module index
+\usepackage[english]{babel}
+%\usepackage[square,numbers]{natbib}
+\usepackage{natbib}
+
+\begin{document}
+\bibliography{TouchLib-paper}
+\bibliographystyle{abbrvnat}
+\acmConference[CHI]{ACM CHI Conference on Human Factors in Computing Systems}{May 04--09, 2019}{Glasgow, UK}
+\title{TouchLib: a portable and user-friendly library for robust capacitive sensing}
+\author{Admar Schoonen}
+\affiliation{Eindhoven University of Technology, department of Industrial Design}
+\email{admar@familieschoonen.nl}
+\maketitle
+\section{Introduction}
+Capacitive sensors as part of a human interface device (HID) have been used for
+a long time. Their attributes such as low power, low cost, ability to place the
+sensor behind smooth and flush surfaces and the fact that no force at all is
+required to activate the sensor, giving the user an almost magical experience,
+all contribute to their widespread use. FIXME: add references to early
+applications, iPod and iPhone?
+
+However, capacitive sensors are also known to be difficult to work with since
+the signals can be very weak and easily disturbed by external factors such as
+electro-magnetic interference (EMI) from chargers, PWM signals from power
+convertors, motors, LEDs etc, temperature changes or just placing a large
+conductive object near the sensor. FIXME: add references to conductive noise
+from chargers?
+
+In addition to that, many people in the maker and DIY community struggle with
+these sensors due to a lack of a library that offers advanced signal processing
+for capacitive sensor signals as well as not sufficient insight in the
+theoretical background on electrical field propagation and potential
+disturbances.
+
+This article describes the design of an open-source library for
+Arduino-compatible boards that allows novice users to get started with
+capacitive sensing as well as advanced researchers to experiment with different
+measurement and signal processing techniques.
+
+\section{Overview of existing open-source libraries}
+There are two popular methods to measure self capacitance: the first is use an
+RC or LC resonator and measure the time it takes to charge or discharge the
+sensor (oscillator based), the second is to inject a known amount of charge
+(for example by using a reference capacitor) and measuring the resulting
+voltage on the sensor (charge transfer based).
+
+Once of the most popular libraries for capacitive sensing today is the
+CapacitiveSensor library from Paul Stoffregen \cite{CapacitiveSensorWebsite}.
+This library uses a large resistor (typically a few $\textrm{M}\Omega$) to
+create an RC resonator and measures the time it takes to charge and discharge
+the sensor. Similarly, the FastTouch library from Adrian Freed
+\cite{FastTouchWebsite} uses the internal pullup resistor on GPIO pins. This
+has the advantage that it does not require an extra GPIO pin and resistor at
+the disadvantage of a much lower signal to noise ratio.
+
+In contrast, Jens Geisler \cite{QTouchADCArduinoWebsite}, Martin Pittermann
+\cite{ADCTouchWebsite} and Nico Hood \cite{AnalogTouch} all use the charge
+transfer method where they use the internal sample and hold capacitor from the
+internal ADC as reference capacitor. This method is extensively documented as
+CVD method by Microchip in FIXME: add reference to application notes.
+
+What all of these libraries have in common though, is that they have little to
+no signal processing to improve the robustness of the capacitive sensing for
+external influences. Additionally, these libraries are typically targeted to
+only one or two hardware platforms (usually Arduino UNO and one or two other
+boards).
+
+TouchLib was therefore designed from the ground up for robust capacitive
+sensing by using different signal processing methods on different levels of
+signal interpretation. Additionally, the core capacitive sensing function was
+designed to easily add other methods for capacitive sensing or to extend the
+current sensing functions. This feature makes the library ideal for research on
+capacitive sensing methods and also makes it easy to port TouchLib to new
+platforms.
+
+\section{TouchLib design}
+asdaf
+
+\section{FOO}
+- what are capacitive sensors?
+- why touchlib? (existing open source libraries are not portable and lack signal processing for robust sensing + needed framework for research)
+- design goals
+- signal processing (pseudo-differential sampling, pseudo-random scanning order, integration, low pass filter, button state machine)
+- code generator
+- resistive sensing (PrePre, Z-touch)
+- user experiences (e-Textile summercamp 2017, e-Textile springbreak 2018, WeMake makerspace Milano, student groups at TU/e)
+- products (TrueBlue Box, Beleef kussen)
+- future work (documentation on theoretical background of capacitive sensing, documentation of library, better noise measurement, true hierarchical state machine, slider / wheel / trackpad, pattern generator, add support for capacitive sensing using a resistor, improvements to current capacitive sensing methods, reduce memory consumption)
+\end{document}
