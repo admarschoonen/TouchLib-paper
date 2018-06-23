@@ -71,24 +71,91 @@ only one or two hardware platforms (usually Arduino UNO and one or two other
 boards).
 
 TouchLib was therefore designed from the ground up for robust capacitive
-sensing by using different signal processing methods on different levels of
+sensing by using different signal processing methods on several levels of
 signal interpretation. Additionally, the core capacitive sensing function was
 designed to easily add other methods for capacitive sensing or to extend the
-current sensing functions. This feature makes the library ideal for research on
-capacitive sensing methods and also makes it easy to port TouchLib to new
-platforms.
+current sensing functions. This feature makes TouchLib both ideal for research
+on capacitive sensing methods as well as easy to port to other platforms.
 
 \section{TouchLib design}
-asdaf
+\begin{itemize}
+\item drawing of capacitive touch signal
+\item necessity of baseline calibration at startup
+\item signal processing:
+	\begin{itemize}
+	\item pseudo-differential sampling
+	\item pseudo-random scanning order
+	\item integration
+	\item low pass filter
+	\item button state machine
+	\end{itemize}
+\item selectable integration filters
+\item state machine
+\item sensing methods (CVD, touchRead, analogRead)
+\item ports:
+	\begin{itemize}
+	\item Arduino 8-bit AVR,including UNO, Mega, Lilypad, FLORA and many others (ATmega328p, ATmega2560, ATmega32u4)
+	\item Teensy 3.x (Freescale MK-series)
+	\item Particle Photon series (STM32F2xx), ESP32DEV (ESP32))
+	\end{itemize}
+\end{itemize}
+
+\section{Combining capacitive sensing with resistive sensing}
+Adrian Freeds work, PrePre (e-textile summercamp 2016), Z-patch
+
+\section{Code generator}
+\begin{itemize}
+\item no specific program needed on host PC; code generator runs fully on target platform:
+	\begin{itemize}
+	\item no need to install additional software
+	\item works on every computer that can run Arduino IDE
+	\item user does not need to select a specific target platform in the code generator platform as this is known at run-time
+	\end{itemize}
+\item user ends up with ready to use code for their next capacitive touch project
+\item visualization of touch performance after tuning
+\end{itemize}
+
+\section{Applications}
+\begin{itemize}
+\item user experiences
+	\begin{itemize}
+	\item e-Textile summercamp 2017
+	\item e-Textile springbreak 2018
+	\item WeMake makerspace Milano
+	\item student groups at TU/e
+\end{itemize}
+\item commercial products
+	\begin{itemize}
+	\item TrueBlue Box
+	\item Beleef kussen
+	\end{itemize}
+\end{itemize}
+
+\section{Future work}
+In no particular order:
+\begin{itemize}
+\item documentation on theoretical background of capacitive sensing
+\item documentation of API
+\item better noise measurement
+\item true hierarchical state machine
+\item slider / wheel / trackpad
+\item pattern generator
+\item add support for capacitive sensing using a resistor
+\item improvements to current capacitive sensing methods
+\item reduce memory consumption
+\item automated testing
+\end{itemize}
 
 \section{FOO}
-- what are capacitive sensors?
-- why touchlib? (existing open source libraries are not portable and lack signal processing for robust sensing + needed framework for research)
-- design goals
-- signal processing (pseudo-differential sampling, pseudo-random scanning order, integration, low pass filter, button state machine)
-- code generator
-- resistive sensing (PrePre, Z-touch)
-- user experiences (e-Textile summercamp 2017, e-Textile springbreak 2018, WeMake makerspace Milano, student groups at TU/e)
-- products (TrueBlue Box, Beleef kussen)
-- future work (documentation on theoretical background of capacitive sensing, documentation of library, better noise measurement, true hierarchical state machine, slider / wheel / trackpad, pattern generator, add support for capacitive sensing using a resistor, improvements to current capacitive sensing methods, reduce memory consumption)
+
+\begin{itemize}
+\item what are capacitive sensors?
+\item why touchlib? (existing open source libraries are not portable and lack signal processing for robust sensing + needed framework for research)
+\item design goals
+\item code generator
+\item resistive sensing (PrePre, Z-touch)
+\item user experiences (e-Textile summercamp 2017, e-Textile springbreak 2018, WeMake makerspace Milano, student groups at TU/e)
+\item products (TrueBlue Box, Beleef kussen)
+\item future work (documentation on theoretical background of capacitive sensing, documentation of library, better noise measurement, true hierarchical state machine, slider / wheel / trackpad, pattern generator, add support for capacitive sensing using a resistor, improvements to current capacitive sensing methods, reduce memory consumption, automated testing)
+\end{itemize}
 \end{document}
