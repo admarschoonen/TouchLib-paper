@@ -1,0 +1,33 @@
+Who are you, What is your Profession, What kinds of skills do you have related to Cap/Res Sensing
+- male 38 yr
+- freelance software developer (Linux software for servers, desktops and multimedia but no embedded software)
+- no skills related to c/r sensing
+
+What kinds of experince do you have with capacitive and resistive sensing for tangible interactions?
+- none whatsoever
+
+What projects did you use TouchLib for?
+- none whatsoever; this workshop was the first interaction with touchlib
+
+Describe how you develop project like this one you used TouchLib for, do you use a method?
+- command line (not used to Arduino IDE)
+- agile (scrum) and iterative development cycle
+
+Describe how you used TouchLib?
+- workshop setting
+
+What did TouchLib enable
+- more insight into capacitive sensing
+
+How was the project with touchLib different from past expericnes?
+- not relevant
+
+Why would you use TouchLib again?
+
+
+What do you wish TouchLib did differently?
+- better separation of generated calibration code from standard arduino sketch code
+- code generator is called 'example' but should actually be named 'example generator'
+- code generator should not generate code for resistve + capacitive sensing if only capacitive sensing is used
+- better API documentation
+
