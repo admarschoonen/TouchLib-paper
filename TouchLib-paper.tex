@@ -31,7 +31,7 @@ convertors, motors, LEDs etc, temperature changes or just placing a large
 conductive object near the sensor. FIXME: add references to conductive noise
 from chargers?
 
-In addition to that, many people in the maker and DIY community struggle with
+In addition to that, many people in the maker, DIY and artist community struggle with
 these sensors due to a lack of a library that offers advanced signal processing
 for capacitive sensor signals as well as not sufficient insight in the
 theoretical background on electrical field propagation and potential
@@ -61,8 +61,13 @@ the disadvantage of a much lower signal to noise ratio.
 In contrast, Jens Geisler \cite{QTouchADCArduinoWebsite}, Martin Pittermann
 \cite{ADCTouchWebsite} and Nico Hood \cite{AnalogTouch} all use the charge
 transfer method where they use the internal sample and hold capacitor from the
-internal ADC as reference capacitor. This method is extensively documented as
-CVD method by Microchip in FIXME: add reference to application notes.
+internal ADC as reference capacitor. The CVD method has as advantage that it
+does not require any external components and results in high signal to noise
+ratios but it only works on analog input pins. This method is extensively
+documented as CVD method by Microchip in FIXME: add reference to application
+notes.
+
+FIXME: add Z-patch
 
 What all of these libraries have in common though, is that they have little to
 no signal processing to improve the robustness of the capacitive sensing for
@@ -70,12 +75,33 @@ external influences. Additionally, these libraries are typically targeted to
 only one or two hardware platforms (usually Arduino UNO and one or two other
 boards).
 
+FIXME: no easy method for tuning capacitive and resistive sensors
+
 TouchLib was therefore designed from the ground up for robust capacitive
 sensing by using different signal processing methods on several levels of
 signal interpretation. Additionally, the core capacitive sensing function was
 designed to easily add other methods for capacitive sensing or to extend the
 current sensing functions. This feature makes TouchLib both ideal for research
 on capacitive sensing methods as well as easy to port to other platforms.
+
+\section{TouchLib design process}
+how this design process led to easy to use multi-platform library:
+\begin{itemize}
+	\item iterative design method with experience from students and artists from the design, and research community at TU/e, e-textile summercamps, milan workshop as well as experts outside these fields (philip ross got a private milan workshop from troy, paul van tilburg, abbe de groot)
+	\item reflective design
+	\item code generator would not have been designed
+	\item resistive sensing would not have been added if it was not a research library
+	\item ports to different platforms would not have been added if resistive sensing was not already there and if users from our community at TU/e would not have asked for it
+\end{itemize}
+
+how the design process influenced the design specifically:
+\begin{itemize}
+	\item workshop on resistive sensing in 2015, realisation that there is a need for robust capacitive sensing library
+	\item research on combinig capacitive and resistive sensing led to adding resistive sensing as an alternative acquisition method in 2016
+	\item first workshop with students at tue in 2016, led to the code generator
+	\item workshop at e-textile summercamp 2017 and questions from students led to port to teensy and particle photon
+	\item workshop at e-textile spring break 2018 led to port to esp32
+\end{itemize}
 
 \section{TouchLib design}
 \begin{itemize}
@@ -94,9 +120,10 @@ on capacitive sensing methods as well as easy to port to other platforms.
 \item sensing methods (CVD, touchRead, analogRead)
 \item ports:
 	\begin{itemize}
-	\item Arduino 8-bit AVR,including UNO, Mega, Lilypad, FLORA and many others (ATmega328p, ATmega2560, ATmega32u4)
+	\item Arduino 8-bit AVR, including UNO, Mega, Lilypad, FLORA and many others (ATmega328p, ATmega2560, ATmega32u4)
 	\item Teensy 3.x (Freescale MK-series)
-	\item Particle Photon series (STM32F2xx), ESP32DEV (ESP32))
+	\item Particle Photon series (STM32F2xx)
+	\item ESP32DEV (ESP32)
 	\end{itemize}
 \end{itemize}
 
@@ -119,10 +146,14 @@ Adrian Freeds work, PrePre (e-textile summercamp 2016), Z-patch
 \begin{itemize}
 \item user experiences
 	\begin{itemize}
+	\item e-Textile summercamp 2016 (no touchlib, just pre-pre)
 	\item e-Textile summercamp 2017
 	\item e-Textile springbreak 2018
 	\item WeMake makerspace Milano
 	\item student groups at TU/e
+	\item Expert interviews with Hannah, Lara, Liza, Beam, Becky, Zihao Yang, Philip Ross, Abbe, Serge
+	\item 3D printed and textile projects from Troy (note different materials: embroidery, conductive TPU, e-textiles)
+	\item allows faster design - build - evaluation cycles 
 \end{itemize}
 \item commercial products
 	\begin{itemize}
@@ -141,6 +172,7 @@ In no particular order:
 \item slider / wheel / trackpad
 \item pattern generator
 \item add support for capacitive sensing using a resistor
+\item objective comparison between performance (SNR, dynamic range) different sensing methods and platforms
 \item improvements to current capacitive sensing methods
 \item reduce memory consumption
 \item automated testing
